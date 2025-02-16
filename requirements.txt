@@ -4,7 +4,6 @@ requests
 pandas
 Pillow
 folium
-mage-local
 streamlit-js-eval
 streamlit-float
 streamlit-option-menu

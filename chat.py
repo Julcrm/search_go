@@ -13,6 +13,7 @@ import time
 from streamlit_option_menu import option_menu
 from dash_user import dash_user
 from func.SQL_user import SQL_user
+import streamlit as st
 
 
 def chatbot():

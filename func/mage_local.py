@@ -12,7 +12,7 @@ import os
 
 
 class Mage_local:
-    API_KEY = os.getenv('api_bot')
+    API_KEY = os.getenv('api_google')
     # Informations de connexion
     DATABASE_TYPE = os.getenv('DATABASE_TYPE')
     DBAPI = os.getenv('DBAPI')

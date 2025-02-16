@@ -14,6 +14,7 @@ from streamlit_option_menu import option_menu
 from dash_user import dash_user
 from func.SQL_user import SQL_user
 import streamlit as st
+import os
 
 
 def chatbot():
@@ -27,8 +28,7 @@ def chatbot():
         st.session_state.page = page_name
 
 
-    with open('apikeyrm.txt', 'r') as file:
-        API_KEY = file.read().strip()
+    API_KEY = os.getenv('api_google')
 
     if st.session_state.page == "chat":
         # Liste des étapes

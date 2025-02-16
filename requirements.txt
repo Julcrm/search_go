@@ -11,3 +11,4 @@ SQLAlchemy
 numpy
 plotly
 google-generativeai
+psycopg2

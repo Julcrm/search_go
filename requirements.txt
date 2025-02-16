@@ -2,7 +2,6 @@ streamlit
 json5
 requests
 pandas
-gepetto
 Pillow
 folium
 mage-local

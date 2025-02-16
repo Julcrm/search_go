@@ -1,1 +1,1 @@
-web: streamlit run login.py --server.port $PORT
+streamlit run login.py --server.port 8080

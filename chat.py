@@ -104,7 +104,7 @@ def chatbot():
                 # Initialisation du chatbot
                 if "robot" not in st.session_state:
                     st.session_state["robot"] = Robot_bistro()
-                    st.session_state["robot"].preprompt("robot_chat.txt")
+                    st.session_state["robot"].preprompt("prompt/robot_chat.txt")
 
                 # Initialisation de l'historique des messages
                 if "messages" not in st.session_state:
@@ -160,7 +160,7 @@ def chatbot():
                         time.sleep(.5)
                         # Création de Robot_hist pour extraire les informations
                         st.session_state["robot_faim"] = Robot_bistro()
-                        st.session_state["robot_faim"].preprompt("robot_faim.txt")
+                        st.session_state["robot_faim"].preprompt("prompt/robot_faim.txt")
                         history = st.session_state["robot_faim"].talk(phrase)
                         # Stockage des informations extraites
                         st.session_state["extracted_info"] = st.session_state["robot_faim"].talk(history)
@@ -182,7 +182,7 @@ def chatbot():
                    st.session_state.messages) and not st.session_state["has_moved_to_step_2"]:
                 # Création de Robot_hist pour extraire les informations
                 st.session_state["robot_hist"] = Robot_bistro()
-                st.session_state["robot_hist"].preprompt("robot_hist.txt")
+                st.session_state["robot_hist"].preprompt("prompt/robot_hist.txt")
 
                 history = [f'{dico["role"]}:{dico["text"]}' for dico in st.session_state.messages]
                 st.session_state["robot_hist"].talk(history)

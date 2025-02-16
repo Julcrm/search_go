@@ -1,0 +1,14 @@
+streamlit
+json5
+requests
+pandas
+gepetto
+Pillow
+folium
+mage-local
+streamlit-js-eval
+streamlit-float
+streamlit-option-menu
+SQLAlchemy
+numpy
+plotly

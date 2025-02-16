@@ -8,25 +8,21 @@ import streamlit as st
 import folium
 import streamlit.components.v1 as components
 from numpy import mean
+import os
 
 
 class Mage_local:
-    # Charger les informations de connexion depuis le fichier JSON
-    with open("db_identificator.json", "r") as file:
-        config = json.load(file)
-
+    API_KEY = os.getenv('api_bot')
     # Informations de connexion
-    DATABASE_TYPE = config['DATABASE_TYPE']
-    DBAPI = config['DBAPI']
-    HOST = config['HOST']
-    PORT = config['PORT']
-    USER = config['USER']
-    PASSWORD = config['PASSWORD']
-    DATABASE = config['DATABASE']
+    DATABASE_TYPE = os.getenv('DATABASE_TYPE')
+    DBAPI = os.getenv('DBAPI')
+    HOST = os.getenv('PGHOST')
+    PORT = os.getenv('PGPORT')
+    USER = os.getenv('PGUSER')
+    PASSWORD = os.getenv('PGPASSWORD')
+    DATABASE = os.getenv('PGDATABASE')
 
-    #clé API:
-    with open("apikeyrm.txt", "r") as file:
-        API_KEY = file.read().strip()
+
 
     def __init__(self):
         self.engine = create_engine(f"{Mage_local.DATABASE_TYPE}+{Mage_local.DBAPI}://{Mage_local.USER}:{Mage_local.PASSWORD}@{Mage_local.HOST}:{Mage_local.PORT}/{Mage_local.DATABASE}"),

@@ -5,22 +5,20 @@ import json
 import plotly.express as px
 import folium
 import re
+import os
 
 class SQL_user:
     email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
     password_regex = r'^(?=.*[a-zàâäéèêëîïôöùûüÿçáéíñóúü])(?=.*[A-ZÀÂÄÉÈÊËÎÏÔÖÙÛÜŸÇÁÉÍÑÓÚÜ])(?=.*\d)(?=.*[@$!%*?&_\"\'\'])[A-Za-zàâäéèêëîïôöùûüÿçáéíñóúüÀÂÄÉÈÊËÎÏÔÖÙÛÜŸÇÁÉÍÑÓÚÜ\d@$!%*?&_\"\'\']{8,}$'
-    # Charger les informations de connexion depuis le fichier JSON
-    with open("db_identificator.json", "r") as file:
-        config = json.load(file)
 
     # Informations de connexion
-    DATABASE_TYPE = config['DATABASE_TYPE']
-    DBAPI = config['DBAPI']
-    HOST = config['HOST']
-    PORT = config['PORT']
-    USER = config['USER']
-    PASSWORD = config['PASSWORD']
-    DATABASE = config['DATABASE']
+    DATABASE_TYPE = os.getenv('DATABASE_TYPE')
+    DBAPI = os.getenv('DBAPI')
+    HOST = os.getenv('PGHOST')
+    PORT = os.getenv('PGPORT')
+    USER = os.getenv('PGUSER')
+    PASSWORD = os.getenv('PGPASSWORD')
+    DATABASE = os.getenv('PGDATABASE')
 
 
     def __init__(self):

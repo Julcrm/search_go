@@ -1,5 +1,5 @@
 import streamlit as st
-from SQL_user import SQL_user
+from func.SQL_user import SQL_user
 from streamlit_option_menu import option_menu
 
 

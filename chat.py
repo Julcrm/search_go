@@ -1,19 +1,18 @@
-import streamlit as st
 import json
 import requests
 import pandas as pd
-from gepetto import Robot_bistro
+from func.gepetto import Robot_bistro
 from PIL import Image
 from io import BytesIO
 import folium
-from mage_local import Mage_local
+from func.mage_local import Mage_local
 from streamlit_js_eval import get_geolocation
 from streamlit_float import *
 import streamlit.components.v1 as components
 import time
 from streamlit_option_menu import option_menu
 from dash_user import dash_user
-from SQL_user import SQL_user
+from func.SQL_user import SQL_user
 
 
 def chatbot():
@@ -110,8 +109,8 @@ def chatbot():
                 if "messages" not in st.session_state:
                     st.session_state.messages = []
 
-                avatar_bot = "icons8-robot-100.png"
-                avatar_user = "user.png"
+                avatar_bot = "img/icons8-robot-100.png"
+                avatar_user = "img/user.png"
                 # Affiche le message de bienvenue avec l'avatar du chatbot
                 st.chat_message("assistant", avatar=avatar_bot).write(st.session_state["robot"].get_welcome())
 
@@ -197,7 +196,7 @@ def chatbot():
 
          # Fonction pour récupérer et redimensionner l'image
         def get_resized_image(photo_reference, size=(200, 200)):
-            default_img = Image.open("icons8-robot-100.png").resize((200, 200))  # Image par défaut
+            default_img = Image.open("img/icons8-robot-100.png").resize((200, 200))  # Image par défaut
             image_url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference="
             if not photo_reference:
                 return default_img

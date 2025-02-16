@@ -1,6 +1,6 @@
 import streamlit as st
 import json
-from SQL_user import SQL_user
+from func.SQL_user import SQL_user
 from chat import chatbot
 from dash_admin import dash_admin
 
@@ -35,7 +35,7 @@ def main():
             show_login_form()
 
 def show_landing_page():
-    st.image("logo_home_search_and_go.png")
+    st.image("img/logo_home_search_and_go.png")
 
     col1, col2 = st.columns(2)
     with col1:
@@ -48,7 +48,7 @@ def show_landing_page():
             st.rerun()
 
 def show_signup_form():
-    st.image("logo_home_search_and_go.png")
+    st.image("img/logo_home_search_and_go.png")
     st.title("Créer un compte")
     # Formulaire de création de compte
     with st.form("signup_form"):
@@ -70,7 +70,7 @@ def show_signup_form():
                 st.rerun()
 
 def show_login_form():
-    st.image("logo_home_search_and_go.png")
+    st.image("img/logo_home_search_and_go.png")
     st.subheader("Se connecter")
     # Formulaire de connexion
     with st.form("login_form"):

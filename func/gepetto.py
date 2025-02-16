@@ -1,14 +1,12 @@
 import google.generativeai as genai
 import json
-
+import os
 import streamlit
 
 
 class Robot_bistro:
     def __init__(self, name_model="gemini-1.5-flash", temperature=1):
-        with open('apikeybot.txt', 'r') as file:  # mettre clé api
-            API_KEY = file.read().strip()
-        self.api_key = API_KEY
+        self.api_key = os.getenv('api_bot')
         self.model = None
         self.name_model = name_model
         self.temperature = temperature
@@ -33,7 +31,7 @@ class Robot_bistro:
         self.talk(system_instruction)
 
     def get_welcome(self):
-        return f"Bonjour {streamlit.session_state['user_id'][2].split()[1]} ! Je suis Robot Bistro, votre assistant pour trouver des restaurants 🍽️. Quel type de restaurant cherchez-vous ?"
+        return f"Bonjour {streamlit.session_state['user_id'][2].split()[1]} ! Je suis Robot Bistro, votre assistant pour découvrir des restaurants 🍽️. Quel type de restaurant recherchez-vous ? Si vous êtes un habitué, cliquez directement sur le bouton 'J'ai faim' et je lancerai une recherche en fonction de vos préférences et de votre position actuelle."
 
 
 

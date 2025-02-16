@@ -1,5 +1,4 @@
-import streamlit as st
-from SQL_user import SQL_user
+from func.SQL_user import SQL_user
 import pandas as pd
 import plotly.express as px
 import folium

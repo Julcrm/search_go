@@ -85,7 +85,7 @@ def chatbot():
             # Disposition des colonnes pour l'affichage avec Streamlit
             chat_col, empty_col, img_col = st.columns([1.5, 0.1, 1])
             with img_col:
-                st.image("Leonardo_Phoenix_09_a_whimsical_cartoon_illustration_of_a_robo_1.jpg", width=500)  # Ajuste la largeur à 500 pixels
+                st.image("img/Leonardo_Phoenix_09_a_whimsical_cartoon_illustration_of_a_robo_1.jpg", width=500)  # Ajuste la largeur à 500 pixels
             with chat_col:
                 if "user_location" not in st.session_state:
                     st.session_state["user_location"] = ()

@@ -139,6 +139,7 @@ def chatbot():
                         category_counts = df_resto['Catégorie'].value_counts()
                         df_favorite = pd.DataFrame(category_counts).reset_index()
                         phrase = f"Je veux manger {df_favorite['Catégorie'].iloc[0]} ou {df_favorite['Catégorie'].iloc[1]}, autour de ces coordonnées GPS {st.session_state['user_location']} pas de budget et de régime alimentaire particulier"
+                       print(phrase)
                         st.toast(f'Vous avez faim et vous aimez la {df_favorite["Catégorie"].iloc[0]}')
                         time.sleep(.5)
                         st.toast(f'Et aussi la {df_favorite["Catégorie"].iloc[1]}')
@@ -146,11 +147,13 @@ def chatbot():
                         st.toast("Allez Go !! je m'occupe de vous trouvez ça", icon='🎉')
                         time.sleep(.5)
                         # Création de Robot_hist pour extraire les informations
-                        st.session_state["robot_faim"] = Robot_bistro()
-                        st.session_state["robot_faim"].preprompt("prompt/robot_faim.txt")
-                        history = st.session_state["robot_faim"].talk(phrase)
+                        st.session_state["robot_hist"] = Robot_bistro()
+                        st.session_state["robot_hist"].preprompt("prompt/robot_hist.txt")
+                        history = st.session_state["robot_hist"].talk(phrase)
+                        print(history)
                         # Stockage des informations extraites
-                        st.session_state["extracted_info"] = st.session_state["robot_faim"].talk(history)
+                        st.session_state["extracted_info"] = st.session_state["robot_hist"].talk(history)
+                        print(st.session_state["extracted_info"])
                         # Marque que l'étape 2 a été atteinte pour éviter la boucle infinie
                         st.session_state["has_moved_to_step_2"] = True
                         st.session_state["current_step"] = "🍽️ Trouve ton resto idéal"

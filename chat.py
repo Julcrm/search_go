@@ -135,6 +135,8 @@ def chatbot():
                 with col4:
                     icon = "😩 J'ai FAIMMMM !!! 😩"
                     if st.button(icon):
+                        if "history" not in st.session_state:
+                            st.session_state["history"] = []
                         df_resto = sql_user.listing_resto(st.session_state['user_id'][1])
                         category_counts = df_resto['Catégorie'].value_counts()
                         df_favorite = pd.DataFrame(category_counts).reset_index()
@@ -147,11 +149,9 @@ def chatbot():
                         time.sleep(.5)
                         st.toast("Allez Go !! je m'occupe de vous trouvez ça", icon='🎉')
                         time.sleep(.5)
-                        # Création de Robot_hist pour extraire les informations
+                        st.session_state["history"].append(phrase)
                         query = st.session_state["robot"].talk(phrase)
                         print(query)
-                        if "history" not in st.session_state:
-                            st.session_state["history"] = []
                         st.session_state["history"].append(query)
                         print(st.session_state["history"])
                         st.session_state["robot_hist"] = Robot_bistro()

@@ -147,12 +147,12 @@ def chatbot():
                         st.toast("Allez Go !! je m'occupe de vous trouvez ça", icon='🎉')
                         time.sleep(.5)
                         # Création de Robot_hist pour extraire les informations
-                        st.session_state["robot_hist"] = Robot_bistro()
-                        st.session_state["robot_hist"].preprompt("prompt/robot_hist.txt")
-                        history = st.session_state["robot_hist"].talk(phrase)
+                        st.session_state["robot_faim"] = Robot_bistro()
+                        st.session_state["robot_faim"].preprompt("prompt/robot_faim.txt")
+                        history = st.session_state["robot_faim"].talk(phrase)
                         print(history)
                         # Stockage des informations extraites
-                        st.session_state["extracted_info"] = st.session_state["robot_hist"].talk(history)
+                        st.session_state["extracted_info"] = history
                         print(st.session_state["extracted_info"])
                         # Marque que l'étape 2 a été atteinte pour éviter la boucle infinie
                         st.session_state["has_moved_to_step_2"] = True

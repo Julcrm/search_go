@@ -163,6 +163,9 @@ class SQL_user:
         categories = ['0€-10€', '11€-20€', '21€-30€', '31€-40€', '+41€', 'Inconnu']
         df_histo['Budget'] = pd.Categorical(df_histo['Budget'], categories=categories, ordered=True)
 
+        # Trier le DataFrame par les catégories de Budget
+        df_histo = df_histo.sort_values('Budget')
+
         fig = px.bar(df_histo, x='Budget', y='Total_Resto', labels={'Budget':'Fourchettes de prix', 'Total_Resto':'Nombre de visites'})
         fig.update_layout(title_text='Nombre de visites par fourchette de prix', title_x=0.3)
         fig.update_traces(marker_color="#E7673F")

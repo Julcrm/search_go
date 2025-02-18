@@ -126,22 +126,9 @@ def chatbot():
                 col1, col2, col3, col4, col5= action_buttons_container.columns(cols_dimensions)
 
 
-
-                with col1:
-                    # Convertit la liste des messages en format JSON
-                    json_messages = json.dumps(st.session_state["messages"]).encode("utf-8")
-
-                    # Bouton de téléchargement
-                    st.download_button(
-                        label="📥 Save chat!",
-                        data=json_messages,
-                        file_name="chat_conversation.json",
-                        mime="application/json",
-                    )
-
                 with col2:
                     # Bouton pour effacer le chat
-                    if st.button("Clear Chat 🧹"):
+                    if st.button("Réinitialiser le Chat 🧹"):
                         st.session_state["messages"] = []
                         st.rerun()
 
@@ -152,6 +139,7 @@ def chatbot():
                         category_counts = df_resto['Catégorie'].value_counts()
                         df_favorite = pd.DataFrame(category_counts).reset_index()
                         phrase = f"Je veux manger {df_favorite['Catégorie'].iloc[0]} ou {df_favorite['Catégorie'].iloc[1]}, autour de ces coordonnées GPS {st.session_state['user_location']} pas de budget et de régime alimentaire particulier"
+                        print(phrase)
                         st.toast(f'Vous avez faim et vous aimez la {df_favorite["Catégorie"].iloc[0]}')
                         time.sleep(.5)
                         st.toast(f'Et aussi la {df_favorite["Catégorie"].iloc[1]}')
@@ -162,8 +150,10 @@ def chatbot():
                         st.session_state["robot_faim"] = Robot_bistro()
                         st.session_state["robot_faim"].preprompt("prompt/robot_faim.txt")
                         history = st.session_state["robot_faim"].talk(phrase)
+                        print(history)
                         # Stockage des informations extraites
-                        st.session_state["extracted_info"] = st.session_state["robot_faim"].talk(history)
+                        st.session_state["extracted_info"] = history
+                        print(st.session_state["extracted_info"])
                         # Marque que l'étape 2 a été atteinte pour éviter la boucle infinie
                         st.session_state["has_moved_to_step_2"] = True
                         st.session_state["current_step"] = "🍽️ Trouve ton resto idéal"

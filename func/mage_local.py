@@ -114,7 +114,7 @@ class Mage_local:
 
         return duree_fr  # ✅ Retourne la durée traduite
 
-    def afficher_itineraire(self,start_location, end_location, mode, duree_fr):
+    def afficher_itineraire(self,start_location, end_location, mode):
 
         # 📌 URL de l'API Google Directions
         url = f"https://maps.googleapis.com/maps/api/directions/json?origin={start_location}&destination={end_location}&mode={mode}&key={self.API_KEY}"

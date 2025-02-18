@@ -141,28 +141,27 @@ def chatbot():
                         category_counts = df_resto['Catégorie'].value_counts()
                         df_favorite = pd.DataFrame(category_counts).reset_index()
                         adresse = mage_local.gps_to_address_google(user_lat, user_lon)
+
                         phrase = f"Je veux manger {df_favorite['Catégorie'].iloc[0]} ou {df_favorite['Catégorie'].iloc[1]}, à cette adresse {adresse} pas de budget et de régime alimentaire particulier"
-                        print(phrase)
                         st.toast(f'Vous avez faim et vous aimez la {df_favorite["Catégorie"].iloc[0]}')
                         time.sleep(.5)
                         st.toast(f'Et aussi la {df_favorite["Catégorie"].iloc[1]}')
                         time.sleep(.5)
                         st.toast("Allez Go !! je m'occupe de vous trouvez ça", icon='🎉')
                         time.sleep(.5)
+
                         st.session_state["history"].append(phrase)
                         query = st.session_state["robot"].talk(phrase)
-                        print(query)
+
+
                         st.session_state["history"].append(query)
-                        print(st.session_state["history"])
                         st.session_state["robot_hist"] = Robot_bistro()
                         st.session_state["robot_hist"].preprompt("prompt/robot_hist.txt")
                         history = st.session_state["robot_hist"].talk(st.session_state["history"])
-                        print(history)
 
 
-                        # Stockage des informations extraites
+                         # Stockage des informations extraites
                         st.session_state["extracted_info"] = history
-                        print(st.session_state["extracted_info"])
                         # Marque que l'étape 2 a été atteinte pour éviter la boucle infinie
                         st.session_state["has_moved_to_step_2"] = True
                         st.session_state["current_step"] = "🍽️ Trouve ton resto idéal"

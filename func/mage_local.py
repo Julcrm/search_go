@@ -31,7 +31,7 @@ class Mage_local:
     
     def request_api(self, query):
         query = query
-        url = f"https://maps.googleapis.com/maps/api/place/textsearch/json?query={query}&key={self.API_KEY}"
+        url = f"https://maps.googleapis.com/maps/api/place/textsearch/json?&radius=3000query={query}&key={self.API_KEY}"
         response = requests.get(url)
         data = response.json()
         nb_result = 15

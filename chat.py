@@ -151,7 +151,7 @@ def chatbot():
                         df_resto = sql_user.listing_resto(st.session_state['user_id'][1])
                         category_counts = df_resto['Catégorie'].value_counts()
                         df_favorite = pd.DataFrame(category_counts).reset_index()
-                        phrase = f"Je veux manger {df_favorite['Catégorie'].iloc[0]} ou {df_favorite['Catégorie'].iloc[1]}, autour de ces coordonnées GPS {location_data} pas de budget et de régime alimentaire particulier"
+                        phrase = f"Je veux manger {df_favorite['Catégorie'].iloc[0]} ou {df_favorite['Catégorie'].iloc[1]}, autour de ces coordonnées GPS {st.session_state['user_location']} pas de budget et de régime alimentaire particulier"
                         st.toast(f'Vous avez faim et vous aimez la {df_favorite["Catégorie"].iloc[0]}')
                         time.sleep(.5)
                         st.toast(f'Et aussi la {df_favorite["Catégorie"].iloc[1]}')

@@ -152,11 +152,11 @@ def chatbot():
                         print(query)
                         if "history" not in st.session_state:
                             st.session_state["history"] = []
-                        message = st.session_state["history"].append(query)
-                        print(message)
+                        st.session_state["history"].append(query)
+                        print(st.session_state["history"])
                         st.session_state["robot_hist"] = Robot_bistro()
                         st.session_state["robot_hist"].preprompt("prompt/robot_hist.txt")
-                        history = st.session_state["robot_hist"].talk(message)
+                        history = st.session_state["robot_hist"].talk(st.session_state["history"])
                         print(history)
 
 

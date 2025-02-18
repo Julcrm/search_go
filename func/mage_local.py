@@ -87,9 +87,34 @@ class Mage_local:
                 }
         requests.post(url_api_request_user, json = kwargs)
 
+    def afficher_duree(self, start_location, end_location, mode):
+        # 📌 URL de l'API Google Directions
+        url = f"https://maps.googleapis.com/maps/api/directions/json?origin={start_location}&destination={end_location}&mode={mode}&key={self.API_KEY}"
+        # 📡 Requête à l'API
+        response = requests.get(url)
+        data = response.json()
+
+        # Extraire la durée
+        duree_en= data["routes"][0]["legs"][0]["duration"]["text"]
+        duree_fr = duree_en
 
 
-    def afficher_itineraire(self,start_location, end_location, mode):
+        # Dictionnaire de traduction
+        translations = {
+            "days": "jours",
+            "day": "jour",
+            "hours": "heures",
+            "hour": "heure",
+            "mins": "minutes"
+        }
+
+        # Traduire en français
+        for eng, fr in translations.items():
+            duree_fr = duree_fr.replace(eng, fr)
+
+        return duree_fr  # ✅ Retourne la durée traduite
+
+    def afficher_itineraire(self,start_location, end_location, mode, duree_fr):
 
         # 📌 URL de l'API Google Directions
         url = f"https://maps.googleapis.com/maps/api/directions/json?origin={start_location}&destination={end_location}&mode={mode}&key={self.API_KEY}"
@@ -139,35 +164,13 @@ class Mage_local:
         # 🛣️ Ajouter l'itinéraire sur la carte
         folium.PolyLine(route_coords, color="orange", weight=5, opacity=0.7).add_to(final_map)
 
+        # 📐 Adapter le zoom pour inclure toutes les coordonnées
+        final_map.fit_bounds(route_coords)
+
         return final_map, km
 
 
-    def afficher_duree(self, start_location, end_location, mode):
-        # 📌 URL de l'API Google Directions
-        url = f"https://maps.googleapis.com/maps/api/directions/json?origin={start_location}&destination={end_location}&mode={mode}&key={self.API_KEY}"
-        # 📡 Requête à l'API
-        response = requests.get(url)
-        data = response.json()
-
-        # Extraire la durée
-        duree_en= data["routes"][0]["legs"][0]["duration"]["text"]
-        duree_fr = duree_en
-
-
-        # Dictionnaire de traduction
-        translations = {
-            "days": "jours",
-            "day": "jour",
-            "hours": "heures",
-            "hour": "heure",
-            "mins": "minutes"
-        }
-
-        # Traduire en français
-        for eng, fr in translations.items():
-            duree_fr = duree_fr.replace(eng, fr)
-
-        return duree_fr  # ✅ Retourne la durée traduite
+    
 
 
 

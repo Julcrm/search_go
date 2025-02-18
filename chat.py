@@ -159,7 +159,6 @@ def chatbot():
                         st.session_state["robot_hist"].preprompt("prompt/robot_hist.txt")
                         history = st.session_state["robot_hist"].talk(st.session_state["history"])
 
-
                          # Stockage des informations extraites
                         st.session_state["extracted_info"] = history
                         # Marque que l'étape 2 a été atteinte pour éviter la boucle infinie

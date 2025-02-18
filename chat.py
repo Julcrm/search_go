@@ -15,7 +15,6 @@ from dash_user import dash_user
 from func.SQL_user import SQL_user
 import streamlit as st
 import os
-from login import show_landing_page
 
 
 def chatbot():
@@ -423,8 +422,14 @@ def chatbot():
                 set_page("dash_user")
                 st.rerun()
             if val_menu == "Déconnexion":
-                show_landing_page()
-                st.rerun()
+                st.components.v1.html(
+                    """
+                    <script type="text/javascript">
+                    window.location.reload();
+                    </script>
+                    """,
+                    height=0
+                )
 
     elif st.session_state.page == "dash_user":
         dash_user()

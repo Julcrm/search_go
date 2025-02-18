@@ -154,8 +154,15 @@ class SQL_user:
                 return '+41€'
             else:
                 return 'Inconnu'
+            
+
         # Appliquer la fonction à la colonne Budget
         df_histo['Budget'] = df_histo['Budget'].apply(cat_budget)
+
+        # Définir l'ordre des catégories pour la colonne Budget
+        categories = ['0€-10€', '11€-20€', '21€-30€', '31€-40€', '+41€', 'Inconnu']
+        df_histo['Budget'] = pd.Categorical(df_histo['Budget'], categories=categories, ordered=True)
+
         fig = px.bar(df_histo, x='Budget', y='Total_Resto', labels={'Budget':'Fourchettes de prix', 'Total_Resto':'Nombre de visites'})
         fig.update_layout(title_text='Nombre de visites par fourchette de prix', title_x=0.3)
         fig.update_traces(marker_color="#E7673F")

@@ -126,22 +126,9 @@ def chatbot():
                 col1, col2, col3, col4, col5= action_buttons_container.columns(cols_dimensions)
 
 
-
-                with col1:
-                    # Convertit la liste des messages en format JSON
-                    json_messages = json.dumps(st.session_state["messages"]).encode("utf-8")
-
-                    # Bouton de téléchargement
-                    st.download_button(
-                        label="📥 Save chat!",
-                        data=json_messages,
-                        file_name="chat_conversation.json",
-                        mime="application/json",
-                    )
-
                 with col2:
                     # Bouton pour effacer le chat
-                    if st.button("Clear Chat 🧹"):
+                    if st.button("Réinitialiser le Chat 🧹"):
                         st.session_state["messages"] = []
                         st.rerun()
 

@@ -169,9 +169,15 @@ class Mage_local:
 
         return final_map, km
 
+    def gps_to_address_google(self, latitude, longitude):
+        url = f"https://maps.googleapis.com/maps/api/geocode/json?latlng={latitude},{longitude}&key={self.API_KEY}"
 
-    
+        response = requests.get(url)
+        data = response.json()
 
+        if data["status"] == "OK":
+            return data["results"][0]["formatted_address"]  # Récupère la première adresse trouvée
+        return "Adresse introuvable"
 
 
     def reviews(self, place_id):

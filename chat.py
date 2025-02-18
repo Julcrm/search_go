@@ -138,7 +138,8 @@ def chatbot():
                         df_resto = sql_user.listing_resto(st.session_state['user_id'][1])
                         category_counts = df_resto['Catégorie'].value_counts()
                         df_favorite = pd.DataFrame(category_counts).reset_index()
-                        phrase = f"Je veux manger {df_favorite['Catégorie'].iloc[0]} ou {df_favorite['Catégorie'].iloc[1]}, autour de ces coordonnées GPS {st.session_state['user_location']} pas de budget et de régime alimentaire particulier"
+                        adresse = mage_local.gps_to_address_google(user_lat, user_lon)
+                        phrase = f"Je veux manger {df_favorite['Catégorie'].iloc[0]} ou {df_favorite['Catégorie'].iloc[1]}, à cette adresse {adresse} pas de budget et de régime alimentaire particulier"
                         print(phrase)
                         st.toast(f'Vous avez faim et vous aimez la {df_favorite["Catégorie"].iloc[0]}')
                         time.sleep(.5)
@@ -149,6 +150,8 @@ def chatbot():
                         # Création de Robot_hist pour extraire les informations
                         query = st.session_state["robot"].talk(phrase)
                         print(query)
+                        if "history" not in st.session_state:
+                            st.session_state["history"] = []
                         message = st.session_state["history"].append(query)
                         print(message)
                         st.session_state["robot_hist"] = Robot_bistro()

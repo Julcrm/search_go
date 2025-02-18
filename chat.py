@@ -15,6 +15,7 @@ from dash_user import dash_user
 from func.SQL_user import SQL_user
 import streamlit as st
 import os
+from login import show_landing_page
 
 
 def chatbot():
@@ -414,13 +415,17 @@ def chatbot():
 
 
         with st.sidebar:
-            val_menu = option_menu(menu_title=None, options=["Robot Bistro", "Tableau de bord"],
-                                   icons=['house', 'graph-up-arrow'])
+            val_menu = option_menu(menu_title=None, options=["Robot Bistro", "Tableau de bord", "Déconnexion"],
+                                   icons=['house', 'graph-up-arrow', "box-arrow-left"])
             if val_menu == "Robot Bistro":
                 set_page("chat")
             if val_menu == "Tableau de bord":
                 set_page("dash_user")
                 st.rerun()
+            if val_menu == "Déconnexion":
+                show_landing_page()
+                st.rerun()
+
     elif st.session_state.page == "dash_user":
         dash_user()
 

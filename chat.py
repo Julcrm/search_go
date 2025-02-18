@@ -153,7 +153,7 @@ def chatbot():
                         print(message)
                         st.session_state["robot_hist"] = Robot_bistro()
                         st.session_state["robot_hist"].preprompt("prompt/robot_hist.txt")
-                        history = st.session_state["robot_hist"].talk(history)
+                        history = st.session_state["robot_hist"].talk(message)
                         print(history)
 
 

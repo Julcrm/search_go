@@ -6,8 +6,9 @@ from dash_admin import dash_admin
 
 
 # Vérifier si l'utilisateur est connecté avant de configurer la mise en page
-st.set_page_config(page_title="Robot Bistrot", layout="wide")
-#if "authenticated" in st.session_state and st.session_state["authenticated"]:
+
+if "authenticated" in st.session_state and st.session_state["authenticated"]:
+    st.set_page_config(page_title="Robot Bistrot", layout="wide")
 
 sql_user = SQL_user()
 def main():
@@ -29,6 +30,7 @@ def main():
             dash_admin()
     else:
         if st.session_state["current_page"] == "Landing":
+            st.set_page_config(page_title="Login", layout="centered")
             show_landing_page()
         elif st.session_state["current_page"] == "Signup":
             show_signup_form()

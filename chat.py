@@ -30,6 +30,22 @@ def chatbot():
 
     API_KEY = os.getenv('api_google')
 
+
+    with st.sidebar:
+        val_menu = option_menu(menu_title=None, options=["Robot Bistro", "Tableau de bord", "Déconnexion"],
+                               icons=['house', 'graph-up-arrow', "box-arrow-left"])
+        if val_menu == "Robot Bistro":
+            set_page("chat")
+        if val_menu == "Tableau de bord":
+            print(val_menu)
+            set_page("dash_user")
+            st.rerun()
+        if val_menu == "Déconnexion":
+            st.session_state["authenticated"] = False
+            st.session_state["current_user"] = None
+            st.session_state["current_page"] = "Landing"
+            st.rerun()
+
     if st.session_state.page == "chat":
         # Liste des étapes
         options = ["🤖 Discute avec Robot bistro", "🍽️ Trouve ton resto idéal", "🏁 À table !"]
@@ -412,21 +428,6 @@ def chatbot():
                             mage_local.api_mage_distance(st.session_state["mode"], walking_km)
                         st.toast("C'est parti ! Le trajet a été ajouté à votre tableau de bord 🎉")
 
-
-        with st.sidebar:
-            val_menu = option_menu(menu_title=None, options=["Robot Bistro", "Tableau de bord", "Déconnexion"],
-                                   icons=['house', 'graph-up-arrow', "box-arrow-left"])
-            if val_menu == "Robot Bistro":
-                set_page("chat")
-            if val_menu == "Tableau de bord":
-                print(val_menu)
-                set_page("dash_user")
-                st.rerun()
-            if val_menu == "Déconnexion":
-                st.session_state["authenticated"] = False
-                st.session_state["current_user"] = None
-                st.session_state["current_page"] = "Landing"
-                st.rerun()
 
     elif st.session_state.page == "dash_user":
         dash_user()

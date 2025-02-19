@@ -27,7 +27,7 @@ def dash_admin():
     st.write("")
     st.write("")
     st.write("")
-    col1, col2 = st.columns([0.5,1])
+    col1, col2 = st.columns([0.4,0.5])
 
     with col1:
         if st.button("Déconnexion"):
@@ -63,7 +63,7 @@ def dash_admin():
 
     #--------------------------------------------------------------------------------------------------------#
 
-    # Nombre total d'utilisateurs uniques
+    # Nombre total query
     total_query = df_query["query_id"].nunique()
 
     # Définir la semaine actuelle et la semaine précédente

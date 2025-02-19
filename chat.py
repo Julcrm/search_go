@@ -419,6 +419,7 @@ def chatbot():
             if val_menu == "Robot Bistro":
                 set_page("chat")
             if val_menu == "Tableau de bord":
+                print(val_menu)
                 set_page("dash_user")
                 st.rerun()
             if val_menu == "Déconnexion":

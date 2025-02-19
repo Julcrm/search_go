@@ -46,9 +46,13 @@ def chatbot():
 
         # Si l'utilisateur a choisi une autre étape, on met à jour l'état
         if selection != st.session_state["current_step"]:
+            # Delete all the items in Session state
+            for key in st.session_state.keys():
+                if key != "user_id":
+                    del st.session_state[key]
+                else:
+                    pass
             st.session_state["current_step"] = selection
-            st.session_state["messages"] = []
-            st.session_state["has_moved_to_step_2"] = False
 
 
         if 'dico' not in st.session_state:

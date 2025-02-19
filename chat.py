@@ -422,14 +422,8 @@ def chatbot():
                 set_page("dash_user")
                 st.rerun()
             if val_menu == "Déconnexion":
-                st.components.v1.html(
-                    """
-                    <script type="text/javascript">
-                    window.location.reload();
-                    </script>
-                    """,
-                    height=0
-                )
+                st.session_state["authenticated"] = False
+                st.rerun
 
     elif st.session_state.page == "dash_user":
         dash_user()

@@ -56,6 +56,7 @@ def chatbot():
 
         if selection == "🍽️ Trouve ton resto idéal" and "extracted_info" not in st.session_state:
             st.session_state["current_step"] = "🤖 Discute avec Robot bistro"
+            st.rerun()
 
 
 

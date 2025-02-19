@@ -423,6 +423,8 @@ def chatbot():
                 st.rerun()
             if val_menu == "Déconnexion":
                 st.session_state["authenticated"] = False
+                st.session_state["current_user"] = None
+                st.session_state["current_page"] = "Landing"
                 st.rerun()
 
     elif st.session_state.page == "dash_user":

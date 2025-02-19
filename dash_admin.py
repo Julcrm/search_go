@@ -64,7 +64,7 @@ def dash_admin():
     #--------------------------------------------------------------------------------------------------------#
 
     # Nombre total query
-    total_query = df_query["query_id"].nunique()
+    total_query = round(df_query["query_id"].nunique() / 4)
 
     # Définir la semaine actuelle et la semaine précédente
     current_week_query = df_query["date"].max().isocalendar()[1]  # Semaine actuelle

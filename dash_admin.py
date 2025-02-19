@@ -72,14 +72,14 @@ def dash_admin():
     previous_week_query = current_week_query - 1  # Semaine précédente
 
     # Filtrer les utilisateurs uniques de la semaine dernière
-    previous_week_query_f = df_query[df_query["date"].dt.isocalendar().week == previous_week_query]["query_id"].nunique()
+    previous_week_query_f = round(df_query[df_query["date"].dt.isocalendar().week == previous_week_query]["query_id"].nunique() / 4)
 
     # Calcul du delta
     delta_query = total_query - previous_week_query_f
 
     #--------------------------------------------------------------------------------------------------------#
 
-    # Nombre total d'utilisateurs uniques
+    # Nombre total de restau
     total_restaurants = df_total_restaurants["restaurant_id"].count()
 
     # Définir la semaine actuelle et la semaine précédente

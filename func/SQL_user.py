@@ -302,7 +302,7 @@ class SQL_user:
             data = result.fetchall()
             df = pd.DataFrame(data)
 
-            return df
+        return df
 
     def dash_admin_total_restaurants(self):
         query = text("""
@@ -315,7 +315,7 @@ class SQL_user:
             result = connection.execute(query)
             data = result.fetchall()
             df = pd.DataFrame(data)
-            return df
+        return df
 
     def dash_admin_cat(self):
         query = text("""

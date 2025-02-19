@@ -27,16 +27,16 @@ def dash_admin():
     st.write("")
     st.write("")
     st.write("")
-    col1, col2, col3 = st.columns([0.5,0.2,1])
+    col1, col2 = st.columns([0.5,1])
 
-    with col2:
+    with col1:
         if st.button("Déconnexion"):
             st.session_state["authenticated"] = False
             st.session_state["current_user"] = None
             st.session_state["current_page"] = "Landing"
             st.rerun()
 
-    with col3:
+    with col2:
         st.markdown("<h5 style='text-align: center;'>Bonjour patron , voici un petit tour d'horizon de l'utilisation de Search & GO</h5>",unsafe_allow_html=True)
     st.write("")
     st.divider()

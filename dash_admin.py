@@ -27,8 +27,17 @@ def dash_admin():
     st.write("")
     st.write("")
     st.write("")
+    col1, col2 = st.columns(2)
 
-    st.markdown("<h5 style='text-align: center;'>Bonjour patron , voici un petit tour d'horizon de l'utilisation de Search & GO</h5>",unsafe_allow_html=True)
+    with col1:
+        if st.button("Déconnexion"):
+            st.session_state["authenticated"] = False
+            st.session_state["current_user"] = None
+            st.session_state["current_page"] = "Landing"
+            st.rerun()
+
+    with col2:
+        st.markdown("<h5 style='text-align: center;'>Bonjour patron , voici un petit tour d'horizon de l'utilisation de Search & GO</h5>",unsafe_allow_html=True)
     st.write("")
     st.divider()
 
@@ -86,7 +95,7 @@ def dash_admin():
 
     #______________________________________________________________________________________________________________#
 
-    col1, col2, col3, col4, col5 = st.columns([1,2,2,2,1])
+    col1, col2, col3, col4, col5 = st.columns([2,2,2,2,1])
     col2.metric("Nombre d'utilisateurs", f"{total_users}", f"{delta_users}")
     col3.metric("Nombre de recherches", f"{total_query}", f"{delta_query}")
     col4.metric("Nombre de restaurants dans la base", f"{total_restaurants}", f"{delta_restaurants}")

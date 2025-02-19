@@ -6,14 +6,20 @@ from streamlit_option_menu import option_menu
 def dash_user():
     def set_page(page_name):
         st.session_state.page = page_name
+
     with st.sidebar:
-        val_menu = option_menu(menu_title=None, options=["Robot Bistro", "Tableau de bord"],
-                               icons=['house', 'graph-up-arrow'])
+        val_menu = option_menu(menu_title=None, options=["Robot Bistro", "Tableau de bord", "Déconnexion"],
+                               icons=['house', 'graph-up-arrow', "box-arrow-left"])
         if val_menu == "Robot Bistro":
             set_page("chat")
             st.rerun()
         if val_menu == "Tableau de bord":
             set_page("dash_user")
+        if val_menu == "Déconnexion":
+            st.session_state["authenticated"] = False
+            st.session_state["current_user"] = None
+            st.session_state["current_page"] = "Landing"
+            st.rerun()
 
 
     sql_user = SQL_user()

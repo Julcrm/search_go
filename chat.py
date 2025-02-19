@@ -48,7 +48,7 @@ def chatbot():
         if selection != st.session_state["current_step"]:
             # Delete all the items in Session state
             for key in st.session_state.keys():
-                if key != "user_id":
+                if key not in ["user_id", "authenticated" ,"current_page"]:
                     del st.session_state[key]
                 else:
                     pass

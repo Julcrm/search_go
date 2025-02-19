@@ -6,8 +6,9 @@ from dash_admin import dash_admin
 
 
 # Vérifier si l'utilisateur est connecté avant de configurer la mise en page
-if "authenticated" in st.session_state and st.session_state["authenticated"]:
-    st.set_page_config(page_title="Robot Bistrot", layout="wide")
+st.set_page_config(page_title="Robot Bistrot", layout="wide")
+#if "authenticated" in st.session_state and st.session_state["authenticated"]:
+
 sql_user = SQL_user()
 def main():
     # Initialiser les variables de session

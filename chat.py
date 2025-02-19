@@ -54,6 +54,11 @@ def chatbot():
                     pass
             st.session_state["current_step"] = selection
 
+        if selection == "🍽️ Trouve ton resto idéal" and "extracted_info" not in st.session_state:
+            st.session_state["current_step"] = "🤖 Discute avec Robot bistro"
+
+
+
 
         if 'dico' not in st.session_state:
             st.session_state.dico = dict()

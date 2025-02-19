@@ -27,7 +27,7 @@ def dash_admin():
     st.write("")
     st.write("")
     st.write("")
-    col1, col2, col3 = st.columns([0.3,0.2,2])
+    col1, col2, col3 = st.columns([0.5,0.2,1])
 
     with col2:
         if st.button("Déconnexion"):

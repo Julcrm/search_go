@@ -110,7 +110,7 @@ class SQL_user:
     
     def listing_resto(self, user_id):
         query = text("""                            
-                        SELECT r.name as Nom, r.types as Catégorie, r.formatted_address, r.lat, r.lng, COUNT(q.restaurant_id) as Visite
+                        SELECT r.name as Nom, r.types as Catégorie, r.formatted_address, r.lat, r.lng, COUNT(q.restaurant_id) as Visite, q.note
                         FROM query as q
                         JOIN restaurants as r ON r.restaurant_id = q.restaurant_id
                         WHERE selected = True AND user_id = :user_id
@@ -120,7 +120,7 @@ class SQL_user:
         with self.engine.connect() as connection:
                     result = connection.execute(query, {'user_id': user_id})
                     data = result.fetchall()
-        df_resto = pd.DataFrame(data, columns= ['Lieu', 'Catégorie','formatted_address','lat','lng', 'Visite'])
+        df_resto = pd.DataFrame(data, columns= ['Lieu', 'Catégorie','formatted_address','lat','lng', 'Visite', 'Note'])
         df_resto['ville'] = [re.search(r', (\d{5}) ([\S\s]*),', address).group(2) for address in df_resto['formatted_address']]
         return df_resto        
          

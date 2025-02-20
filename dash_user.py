@@ -98,15 +98,13 @@ def dash_user():
         liste_ville.insert(0,'(toutes)')
         option = st.selectbox("Ville", liste_ville)
 
-        df_liste["note"] = 0
-
         if option != '(toutes)' :
             df_user = df_liste[df_liste['ville']==option]
             edited_df = st.data_editor(
-                df_user[['Lieu', 'Catégorie', 'Visite', 'note']],
+                df_user[['Lieu', 'Catégorie', 'Visite', 'Note']],
                 column_config={
                     "command": "Streamlit Command",
-                    "rating": st.column_config.NumberColumn(
+                    "note": st.column_config.NumberColumn(
                         "Your rating",
                         help="How much do you like this command (1-5)?",
                         min_value=1,
@@ -125,7 +123,7 @@ def dash_user():
         else :
             df_user = df_liste
             edited_df = st.data_editor(
-                df_user[['Lieu', 'Catégorie', 'Visite', 'note']],
+                df_user[['Lieu', 'Catégorie', 'Visite', 'Note']],
                 column_config={
                     "command": "Streamlit Command",
                     "note": st.column_config.NumberColumn(

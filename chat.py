@@ -132,7 +132,7 @@ def chatbot():
                 col1, col2, col3, col4= action_buttons_container.columns(cols_dimensions)
 
 
-                with col1:
+                with col2:
                     # Bouton pour effacer le chat
                     if st.button("Réinitialiser le Chat 🧹"):
                         st.session_state["messages"] = []

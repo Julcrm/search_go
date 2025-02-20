@@ -13,3 +13,4 @@ plotly
 google-generativeai
 psycopg2
 streamlit_folium
+python-dotenv

@@ -100,6 +100,9 @@ def dash_user():
         liste_ville.insert(0,'(toutes)')
         option = st.selectbox("Ville", liste_ville)
 
+        if "data" not in st.session_state:
+            st.session_state["data"] = df_liste
+
         if option != '(toutes)' :
             df_user = df_liste[df_liste['ville']==option]
             st.data_editor(

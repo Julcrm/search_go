@@ -97,11 +97,38 @@ def dash_user():
         liste_ville = df_liste['ville'].sort_values(ascending=True).unique().tolist()
         liste_ville.insert(0,'(toutes)')
         option = st.selectbox("Ville", liste_ville)
+
+        df_liste["note"] = 0
+
         if option != '(toutes)' :
             df_user = df_liste[df_liste['ville']==option]
         else :
             df_user = df_liste
-        st.dataframe(df_user[['Lieu','Catégorie','Visite']], hide_index=True)
+
+        #st.dataframe(df_user[['Lieu','Catégorie','Visite']], hide_index=True)
+
+        edited_df = st.data_editor(
+            df_user[['Lieu','Catégorie','Visite','note']],
+            column_config={
+                "command": "Streamlit Command",
+                "rating": st.column_config.NumberColumn(
+                    "Your rating",
+                    help="How much do you like this command (1-5)?",
+                    min_value=1,
+                    max_value=5,
+                    step=1,
+                    format="%d ⭐",
+                ),
+                "is_widget": "Widget ?",
+            },
+            disabled=["command", "is_widget"],
+            hide_index=True,
+        )
+
+        favorite_command = edited_df.loc[edited_df["rating"].idxmax()]["command"]
+        st.markdown(f"Your favorite command is **{favorite_command}** 🎈")
+
+
 
 
     # Ajouter des éléments dans la deuxième colonne

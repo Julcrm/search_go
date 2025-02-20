@@ -456,8 +456,7 @@ def chatbot():
                         else:
                             mage_local.api_mage_distance(st.session_state["mode"], walking_km)
                         st.toast("C'est parti ! Le trajet a été ajouté à votre tableau de bord 🎉")
-
-
+                        st.session_state['current_step'] = 'Go !'
         with st.sidebar:
             val_menu = option_menu(menu_title=None, options=["Robot Bistro", "Tableau de bord", "Déconnexion"],
                                    icons=['house', 'graph-up-arrow', "box-arrow-left"])
@@ -471,6 +470,112 @@ def chatbot():
                 st.session_state["current_user"] = None
                 st.session_state["current_page"] = "Landing"
                 st.rerun()
+
+        if st.session_state["current_step"] == "Go !":
+
+            options_3 = ["🤖 Discute avec Robot bistro", "🍽️ Trouve ton resto idéal", "🏁 À table !"]
+
+            # Affichage des étapes avec st.pills
+            selection_3 = st.pills("Les étapes :", options_3, selection_mode="single",default=st.session_state["current_step"])
+
+            st.divider()
+
+            if selection_3 != st.session_state["current_step"]:
+                if selection_3 == "🤖 Discute avec Robot bistro":  # Delete all the items in Session state
+                    for key in st.session_state.keys():
+                        if key not in ["user_id", "authenticated", "current_page"]:
+                            del st.session_state[key]
+                    st.session_state["current_step"] = selection_3
+                    st.rerun()
+                else:
+                    st.session_state["current_step"] = selection_3
+                    st.rerun()
+
+            # if "mode" not in st.session_state:
+            #     st.session_state["mode"] = "driving"
+
+            # 📍 Coordonnées de départ et d'arrivée
+            start_location = f"{st.session_state['user_location'][0]}, {st.session_state['user_location'][1]}"
+            end_location = f"{st.session_state['lat']}, {st.session_state['lng']}"
+
+            # Affichage initial de la carte avec mode "driving"
+            driving_map, driving_km = mage_local.afficher_itineraire(start_location, end_location, st.session_state["mode"])
+
+            walking_map, walking_km = mage_local.afficher_itineraire(start_location, end_location, st.session_state["mode"])
+
+            cols = st.columns([2, 0.7, 0.2, 0.1, 3])
+
+            with cols[4]:
+                st.markdown(
+                    """
+                    <div style="text-align: center;">
+                        <h3>📍 Sélection :</h3>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
+
+                st.write(f"<div style='text-align: center;'>{st.session_state['selected']}</div>", unsafe_allow_html=True)
+                st.write("")
+                # Image redimensionnée et centrée
+                img = get_resized_image(st.session_state["photo_reference_selected"])
+
+                col_empty_m1, col_empty_m2, col_map = st.columns([0.5, 1, 3])  # Deux sous-colonnes
+
+                with col_map:
+                    st.image(img)
+
+                st.markdown("""<div style="text-align: center;"><h3>🏠 Adresse :</h3></div>""",unsafe_allow_html=True)
+
+                st.write(f"<div style='text-align: center;'>{st.session_state['formated_address_selected']}</div>",unsafe_allow_html=True)
+
+                phone = mage_local.phone(st.session_state["place_id"])
+
+                st.markdown("")
+
+                st.markdown("""<div style="text-align: center;">   <h3>☎️ Téléphone :</h3> </div>  """, unsafe_allow_html=True)
+
+                st.write(f"<div style='text-align: center;'>{phone}</div>",unsafe_allow_html=True)
+
+                st.markdown("<hr style='border: 1px solid #ddd; width: 100%;'>", unsafe_allow_html=True)
+
+                st.markdown("""<div style="text-align: center;"> <h3>⭐ Avis :</h3></div>""",unsafe_allow_html=True)
+
+                reviews = mage_local.reviews(st.session_state["place_id"])
+
+                if len(reviews) >0:
+                    # Afficher le carrousel dans l'app Streamlit
+                    mage_local.show_carrousel(reviews)
+
+            with cols[0]:  # Même colonne pour le toggle et le bouton
+                col_toggle, col_empty = st.columns([5, 0.5, 1])  # Deux sous-colonnes
+
+                # with col_toggle:
+                #     walking = st.toggle("Y aller à pied", key="toggle")
+
+                if walking:
+                    st.session_state["mode"] = "walking"
+                    walking_duree = mage_local.afficher_duree(start_location, end_location, st.session_state["mode"])
+                    st.markdown(f"""<div style="font-size: 1.25rem; font-weight: bold;">Temps de trajet : {walking_duree} &nbsp;&nbsp; <img src="https://i.ibb.co/LhJVnC1m/walking.png" width="40"></div>""", unsafe_allow_html=True)
+
+                else:
+                    st.session_state["mode"] = "driving"
+                    driving_duree = mage_local.afficher_duree(start_location, end_location, st.session_state["mode"])
+                    st.markdown(f"""<div style="font-size: 1.25rem; font-weight: bold;">Temps de trajet : {driving_duree} &nbsp;&nbsp; <img src="https://i.ibb.co/qFFFybvZ/car-1.png" width="40"></div>""", unsafe_allow_html=True)
+
+                if st.session_state["mode"] == "driving":
+                    st.components.v1.html(driving_map._repr_html_(), height=600, width=550)
+                else:
+                    st.components.v1.html(walking_map._repr_html_(), height=600, width=550)
+
+                # with col_button:
+                #     if st.button("GO !!", key="go"):
+                #         if st.session_state["mode"] == "driving":
+                #             mage_local.api_mage_distance(st.session_state["mode"],driving_km)
+                #         else:
+                #             mage_local.api_mage_distance(st.session_state["mode"], walking_km)
+                #         st.toast("C'est parti ! Le trajet a été ajouté à votre tableau de bord 🎉")
+
 
     elif st.session_state.page == "dash_user":
         dash_user()

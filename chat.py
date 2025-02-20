@@ -128,17 +128,17 @@ def chatbot():
                 action_buttons_container = st.container(key="testcont")
 
                 # Espacement entre les icônes
-                cols_dimensions = [23, 24, 9, 40, 8.6]
-                col1, col2, col3, col4, col5= action_buttons_container.columns(cols_dimensions)
+                cols_dimensions = [24, 9, 40, 8.6]
+                col1, col2, col3, col4= action_buttons_container.columns(cols_dimensions)
 
 
-                with col2:
+                with col1:
                     # Bouton pour effacer le chat
                     if st.button("Réinitialiser le Chat 🧹"):
                         st.session_state["messages"] = []
                         st.rerun()
 
-                with col4:
+                with col3:
                     icon = "😩 J'ai FAIMMMM !!! 😩"
                     if st.button(icon):
                         if "history" not in st.session_state:

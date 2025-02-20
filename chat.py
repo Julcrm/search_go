@@ -86,6 +86,7 @@ def chatbot():
                     else:
                         pass
                 st.session_state["current_step"] = selection_1
+                st.rerun()
 
             # Disposition des colonnes pour l'affichage avec Streamlit
             chat_col, empty_col, img_col = st.columns([1.5, 0.1, 1])
@@ -224,6 +225,7 @@ def chatbot():
 
             if selection_2 != st.session_state["current_step"]:
                 st.session_state["current_step"] = selection_2
+                st.rerun()
 
             st.divider()
 
@@ -353,6 +355,7 @@ def chatbot():
 
             if selection_3 != st.session_state["current_step"]:
                 st.session_state["current_step"] = selection_3
+                st.rerun()
 
             if "mode" not in st.session_state:
                 st.session_state["mode"] = "driving"

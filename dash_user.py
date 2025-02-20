@@ -102,31 +102,52 @@ def dash_user():
 
         if option != '(toutes)' :
             df_user = df_liste[df_liste['ville']==option]
+            edited_df = st.data_editor(
+                df_user[['Lieu', 'Catégorie', 'Visite', 'note']],
+                column_config={
+                    "command": "Streamlit Command",
+                    "rating": st.column_config.NumberColumn(
+                        "Your rating",
+                        help="How much do you like this command (1-5)?",
+                        min_value=1,
+                        max_value=5,
+                        step=1,
+                        format="%d ⭐",
+                    ),
+                    "is_widget": "Widget ?",
+                },
+                disabled=["command", "is_widget"],
+                hide_index=True,
+            )
+
+            favorite_restau = edited_df.loc[edited_df["note"].idxmax()]["Lieu"]
+            st.markdown(f"Ton restaurant favoris est **{favorite_restau}** 🎈")
         else :
             df_user = df_liste
+            edited_df = st.data_editor(
+                df_user[['Lieu', 'Catégorie', 'Visite', 'note']],
+                column_config={
+                    "command": "Streamlit Command",
+                    "note": st.column_config.NumberColumn(
+                        "Your rating",
+                        help="How much do you like this command (1-5)?",
+                        min_value=1,
+                        max_value=5,
+                        step=1,
+                        format="%d ⭐",
+                    ),
+                    "is_widget": "Widget ?",
+                },
+                disabled=["command", "is_widget"],
+                hide_index=True,
+            )
+
+            favorite_restau = edited_df.loc[edited_df["note"].idxmax()]["Lieu"]
+            st.markdown(f"Ton restaurant favoris est **{favorite_restau}** 🎈")
 
         #st.dataframe(df_user[['Lieu','Catégorie','Visite']], hide_index=True)
 
-        edited_df = st.data_editor(
-            df_user[['Lieu','Catégorie','Visite','note']],
-            column_config={
-                "command": "Streamlit Command",
-                "rating": st.column_config.NumberColumn(
-                    "Your rating",
-                    help="How much do you like this command (1-5)?",
-                    min_value=1,
-                    max_value=5,
-                    step=1,
-                    format="%d ⭐",
-                ),
-                "is_widget": "Widget ?",
-            },
-            disabled=["command", "is_widget"],
-            hide_index=True,
-        )
 
-        favorite_restau = edited_df.loc[edited_df["note"].idxmax()]["Lieu"]
-        st.markdown(f"Ton restaurant favoris est **{favorite_restau}** 🎈")
 
 
 

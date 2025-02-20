@@ -4,7 +4,7 @@ import plotly.express as px
 import folium
 from folium.plugins import MarkerCluster
 import streamlit as st
-
+from streamlit_folium import st_folium
 
 
 
@@ -253,5 +253,6 @@ def dash_admin():
         map_folium.add_to(fig)
 
         # Afficher la carte dans Streamlit
-        st.components.v1.html(map_folium._repr_html_(), height=580, width=550)
+        #st.components.v1.html(map_folium._repr_html_(), height=580, width=550)
+        st_folium(map_folium)
 

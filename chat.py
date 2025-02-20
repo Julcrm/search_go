@@ -456,7 +456,7 @@ def chatbot():
                         else:
                             mage_local.api_mage_distance(st.session_state["mode"], walking_km)
                         st.toast("C'est parti ! Le trajet a été ajouté à votre tableau de bord 🎉")
-                        st.session_state['current_step'] = 'Go !'
+                    st.session_state['current_step'] = 'Go !'
 
         if st.session_state["current_step"] == "Go !":
 
@@ -478,17 +478,6 @@ def chatbot():
                     st.session_state["current_step"] = selection_3
                     st.rerun()
 
-            # if "mode" not in st.session_state:
-            #     st.session_state["mode"] = "driving"
-
-            # 📍 Coordonnées de départ et d'arrivée
-            # start_location = f"{st.session_state['user_location'][0]}, {st.session_state['user_location'][1]}"
-            # end_location = f"{st.session_state['lat']}, {st.session_state['lng']}"
-
-            # # Affichage initial de la carte avec mode "driving"
-            # driving_map, driving_km = mage_local.afficher_itineraire(start_location, end_location, st.session_state["mode"])
-
-            # walking_map, walking_km = mage_local.afficher_itineraire(start_location, end_location, st.session_state["mode"])
 
             cols = st.columns([2, 0.7, 0.2, 0.1, 3])
 

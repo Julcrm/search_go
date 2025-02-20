@@ -456,7 +456,7 @@ def chatbot():
                         else:
                             mage_local.api_mage_distance(st.session_state["mode"], walking_km)
                         st.toast("C'est parti ! Le trajet a été ajouté à votre tableau de bord 🎉")
-                    # st.session_state['current_step'] = 'Go !'
+                        st.session_state['current_step'] = 'Go !'
 
         if st.session_state["current_step"] == "Go !":
 

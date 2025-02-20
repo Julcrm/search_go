@@ -480,9 +480,9 @@ def chatbot():
                     st.rerun()
 
 
-            cols = st.columns([2, 0.7, 0.2, 0.1, 3])
+            cols1, cols2 = st.columns(2)
 
-            with cols[4]:
+            with cols2:
                 st.markdown(
                     """
                     <div style="text-align: center;">
@@ -524,7 +524,7 @@ def chatbot():
                     # Afficher le carrousel dans l'app Streamlit
                     mage_local.show_carrousel(reviews)
 
-            with cols[0]: 
+            with cols1: 
 
                 st.markdown("""
         <style>
@@ -538,7 +538,7 @@ def chatbot():
         .bonappetit {
             font-family: 'Bad Script', cursive;
             font-size: 48px;
-            text-align: left;
+            text-align: center;
         }
         .bottom-right {
             position: absolute;
@@ -555,6 +555,8 @@ def chatbot():
                 st.markdown('<div class="handwritten">Merci d\'avoir choisi Bistro Robot</div>', unsafe_allow_html=True)
                 st.write("")
                 st.markdown('<div class="bonappetit">Bon appétît</div>', unsafe_allow_html=True)
+                st.write("")
+                st.write("")
                 st.write("")
                 st.write("")
                 st.write("")

@@ -5,6 +5,10 @@ import plotly.express as px
 import folium
 import re
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 class SQL_user:
     email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
@@ -18,6 +22,7 @@ class SQL_user:
     USER = os.getenv('PGUSER')
     PASSWORD = os.getenv('PGPASSWORD')
     DATABASE = os.getenv('PGDATABASE')
+    print(DATABASE)
 
 
     def __init__(self):

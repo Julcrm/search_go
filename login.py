@@ -3,6 +3,9 @@ import json
 from func.SQL_user import SQL_user
 from chat import chatbot
 from dash_admin import dash_admin
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 # Vérifier si l'utilisateur est connecté avant de configurer la mise en page

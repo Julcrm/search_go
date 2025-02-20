@@ -4,12 +4,12 @@ import plotly.express as px
 import folium
 from folium.plugins import MarkerCluster
 import streamlit as st
-from streamlit_folium import st_folium
+
+
 
 
 
 def dash_admin():
-
 
     sql_user = SQL_user()
 
@@ -215,49 +215,45 @@ def dash_admin():
 
         st.markdown("""<h5 style="text-align: center; font-size: 17px; font-weight: bold; color: white;">Carte des restaurants</h5>""",unsafe_allow_html=True)
         # Remplir les valeurs manquantes et convertir en entier
-        df_map["selected_count"] = df_map["selected_count"].fillna(0).astype(int)
 
         # Centrer la carte
         center_map = [46.233870597212665, 2.221999414881632]
-        if "map_folium" not in st.session_state:
+        # Créer la carte Folium
+        map_folium = folium.Map(
+            location=center_map,
+            zoom_start=5,
+            tiles="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png",
+             attr='&copy; <a ></a> ',)
 
-            # Créer la carte Folium
-            map_folium = folium.Map(
-                location=center_map,
-                zoom_start=5,
-                tiles="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png",
-                 attr='&copy; <a ></a> ',)
+        # Ajouter un cluster de marqueurs
+        marker_cluster = MarkerCluster().add_to(map_folium)
 
-            # Ajouter un cluster de marqueurs
-            marker_cluster = MarkerCluster().add_to(map_folium)
-
-            # Boucle pour ajouter les marqueurs
-            for i, (lat, lng) in enumerate(df_map[['lat', 'lng']].values.tolist()):
-                popup_html = f"""
-                    <div style='width:300px'>
-                    <b>Nom :</b> {df_map.iloc[i]["name"]} 🏙️<br>
-                    <b>Nombre de visites :</b> {df_map.iloc[i]["selected_count"]} 🏆<br>
+        # Boucle pour ajouter les marqueurs
+        for i, (lat, lng) in enumerate(df_map[['lat', 'lng']].values.tolist()):
+            popup_html = f"""
+                <div style='width:300px'>
+                <b>Nom :</b> {df_map.iloc[i]["name"]} 🏙️<br>
+                <b>Nombre de visites :</b> {df_map.iloc[i]["selected_count"]} 🏆<br>
+                </div>
+            """
+            marker = folium.Marker(
+                location=[lat, lng],
+                tooltip="Plus d'informations !",
+                popup=popup_html,
+                icon=folium.DivIcon(html="""
+                    <div style="text-align: center;">
+                        <img src="https://i.postimg.cc/jSQwjLmS/hat.png"
+                        style="width: 30px; height: 30px;"><br>
                     </div>
-                """
-                marker = folium.Marker(
-                    location=[lat, lng],
-                    tooltip="Plus d'informations !",
-                    popup=popup_html,
-                    icon=folium.DivIcon(html="""
-                        <div style="text-align: center;">
-                            <img src="https://i.postimg.cc/jSQwjLmS/hat.png"
-                            style="width: 30px; height: 30px;"><br>
-                        </div>
-                    """)
-                ).add_to(marker_cluster)
-            fig = folium.Figure(height=500, width=550)  # Définit la taille de la carte
-            map_folium.add_to(fig)
+                """)
+            )
 
-            # Afficher la carte dans Streamlit
-            #st.components.v1.html(map_folium._repr_html_(), height=580, width=550)
+            # Ajouter le marqueur au cluster
+            marker.add_to(marker_cluster)
 
-            st.session_state["map_folium"] = map_folium
-
-        st_folium(st.session_state["map_folium"])
+        fig = folium.Figure(height=500, width=550)  # Définit la taille de la carte
+        map_folium.add_to(fig)
+        # Afficher la carte dans Streamlit
+        st.components.v1.html(map_folium._repr_html_(), height=580, width=550)
 
 

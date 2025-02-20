@@ -535,12 +535,17 @@ def chatbot():
             font-size: 48px;
             text-align: center;
         }
+        .bonappetit {
+            font-family: 'Bad Script', cursive;
+            font-size: 48px;
+            text-align: left;
+        }
         .bottom-right {
             position: absolute;
             bottom: 10px;
             right: 10px;
             font-family: 'Bad Script', cursive;
-            font-size: 24px;
+            font-size: 30px;
         }
         </style>
         """, unsafe_allow_html=True)
@@ -548,7 +553,11 @@ def chatbot():
                 st.write("")
                 st.write("")
                 st.markdown('<div class="handwritten">Merci d\'avoir choisi Bistro Robot</div>', unsafe_allow_html=True)
-                st.markdown('<div class="handwritten">Bon appétît</div>', unsafe_allow_html=True)
+                st.write("")
+                st.markdown('<div class="bonappetit">Bon appétît</div>', unsafe_allow_html=True)
+                st.write("")
+                st.write("")
+                st.write("")
                 # Ajouter un délai de quelques secondes
                 time.sleep(3)
                 st.markdown('<div class="bottom-right">Merci Léo</div>', unsafe_allow_html=True)

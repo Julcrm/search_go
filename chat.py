@@ -32,7 +32,7 @@ def chatbot():
 
     if st.session_state.page == "chat":
         # Liste des étapes
-        options = ["🤖 Discute avec Robot bistro", "🍽️ Trouve ton resto idéal", "🏁 À table !"]
+        options_1 = ["🤖 Discute avec Robot bistro", "🍽️ Trouve ton resto idéal", "🏁 À table !"]
 
 
         # Initialisation de l'étape courante dans session_state si elle n'existe pas
@@ -40,23 +40,22 @@ def chatbot():
             st.session_state["current_step"] = "🤖 Discute avec Robot bistro"
 
         # Affichage des étapes avec st.pills
-        selection = st.pills("Les étapes :", options, selection_mode="single", default=st.session_state["current_step"])
+        selection_1 = st.pills("Les étapes :", options_1, selection_mode="single", default=st.session_state["current_step"])
 
         st.divider()
 
         # Si l'utilisateur a choisi une autre étape, on met à jour l'état
-        if selection != st.session_state["current_step"]:
+        if selection_1 != st.session_state["current_step"]:
             # Delete all the items in Session state
             for key in st.session_state.keys():
                 if key not in ["user_id", "authenticated" ,"current_page"]:
                     del st.session_state[key]
                 else:
                     pass
-            st.session_state["current_step"] = selection
+            st.session_state["current_step"] = selection_1
 
-        if selection == "🍽️ Trouve ton resto idéal" and "extracted_info" not in st.session_state:
+        if selection_1 == "🍽️ Trouve ton resto idéal" and "extracted_info" not in st.session_state:
             st.session_state["current_step"] = "🤖 Discute avec Robot bistro"
-
 
 
 
@@ -91,6 +90,7 @@ def chatbot():
 
 
         if st.session_state["current_step"] == "🤖 Discute avec Robot bistro":
+
             # Disposition des colonnes pour l'affichage avec Streamlit
             chat_col, empty_col, img_col = st.columns([1.5, 0.1, 1])
             with img_col:
@@ -220,6 +220,15 @@ def chatbot():
 
         # Vérifier que la session est au bon état
         if st.session_state["current_step"] == "🍽️ Trouve ton resto idéal":
+
+            options_2 = ["🤖 Discute avec Robot bistro", "🍽️ Trouve ton resto idéal"]
+
+            # Affichage des étapes avec st.pills
+            selection_2 = st.pills("Les étapes :", options_2, selection_mode="single",default=st.session_state["current_step"])
+
+            if selection_2 != st.session_state["current_step"]:
+                st.session_state["current_step"] = selection_2
+
             # URL de l'API de l'image
             if "selected" not in st.session_state:
                 st.session_state["selected"] = ""
@@ -336,6 +345,15 @@ def chatbot():
 
 
         if st.session_state["current_step"] == "🏁 À table !":
+
+            options_3 = ["🤖 Discute avec Robot bistro", "🍽️ Trouve ton resto idéal", "🏁 À table !"]
+
+            # Affichage des étapes avec st.pills
+            selection_3 = st.pills("Les étapes :", options_3, selection_mode="single",default=st.session_state["current_step"])
+
+            if selection_3 != st.session_state["current_step"]:
+                st.session_state["current_step"] = selection_3
+
             if "mode" not in st.session_state:
                 st.session_state["mode"] = "driving"
 

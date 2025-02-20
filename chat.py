@@ -32,7 +32,7 @@ def chatbot():
 
     if st.session_state.page == "chat":
         # Liste des étapes
-        options_1 = ["🤖 Discute avec Robot bistro", "🍽️ Trouve ton resto idéal", "🏁 À table !"]
+        options_1 = ["🤖 Discute avec Robot bistro"]
 
 
         # Initialisation de l'étape courante dans session_state si elle n'existe pas

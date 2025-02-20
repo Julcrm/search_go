@@ -128,7 +128,7 @@ def chatbot():
                 action_buttons_container = st.container(key="testcont")
 
                 # Espacement entre les icônes
-                cols_dimensions = [24, 9, 40, 8.6]
+                cols_dimensions = [20, 29, 40, 9]
                 col1, col2, col3, col4= action_buttons_container.columns(cols_dimensions)
 
 

@@ -527,21 +527,35 @@ def chatbot():
             with cols[0]: 
 
                 st.markdown("""
-                        <style>
-                        @import url('https://fonts.bunny.net/css?family=bad-script:400');
+        <style>
+        @import url('https://fonts.bunny.net/css?family=bad-script:400');
 
-                        .handwritten {
-                            font-family: 'Bad Script', cursive;
-                            font-size: 24px;
-                        }
-                        </style>
-                        """,
-                        unsafe_allow_html=True)
-
+        .handwritten {
+            font-family: 'Bad Script', cursive;
+            font-size: 48px;
+            text-align: center;
+        }
+        .bottom-right {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-family: 'Bad Script', cursive;
+            font-size: 24px;
+        }
+        </style>
+        """, unsafe_allow_html=True)
+                st.write("")
+                st.write("")
+                st.write("")
                 st.markdown('<div class="handwritten">Merci d\'avoir choisi Bistro Robot</div>', unsafe_allow_html=True)
                 st.markdown('<div class="handwritten">Bon appétît</div>', unsafe_allow_html=True)
+                # Ajouter un délai de quelques secondes
+                time.sleep(3)
+                st.markdown('<div class="bottom-right">Merci Léo</div>', unsafe_allow_html=True)
+                time.sleep(2)
+                st.balloons()
 
-        
+
         with st.sidebar:
             val_menu = option_menu(menu_title=None, options=["Robot Bistro", "Tableau de bord", "Déconnexion"],
                                    icons=['house', 'graph-up-arrow', "box-arrow-left"])

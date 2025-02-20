@@ -125,7 +125,7 @@ def dash_user():
             hide_index=True,
         )
 
-        favorite_command = edited_df.loc[edited_df["rating"].idxmax()]["command"]
+        favorite_command = edited_df.loc[edited_df["note"].idxmax()]["command"]
         st.markdown(f"Your favorite command is **{favorite_command}** 🎈")
 
 

@@ -114,7 +114,7 @@ class SQL_user:
                         FROM query as q
                         JOIN restaurants as r ON r.restaurant_id = q.restaurant_id
                         WHERE selected = True AND user_id = :user_id
-                        GROUP BY r.name, r.types, r.formatted_address, r.lat, r.lng
+                        GROUP BY r.name, r.types, r.formatted_address, r.lat, r.lng, q.note
                         ORDER BY COUNT(q.restaurant_id) DESC
                         """)
         with self.engine.connect() as connection:

@@ -109,6 +109,7 @@ def dash_user():
                         help="How much do you like this command (1-5)?",
                         min_value=1,
                         max_value=5,
+
                         step=1,
                         format="%d ⭐",
                     ),

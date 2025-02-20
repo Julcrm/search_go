@@ -253,6 +253,6 @@ def dash_admin():
         map_folium.add_to(fig)
 
         # Afficher la carte dans Streamlit
-        #st.components.v1.html(map_folium._repr_html_(), height=580, width=550)
-        st_folium(map_folium)
+        st.components.v1.html(map_folium._repr_html_(), height=580, width=550)
+
 

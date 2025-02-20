@@ -574,9 +574,11 @@ def chatbot():
                 set_page("dash_user")
                 st.rerun()
             if val_menu == "Déconnexion":
-                st.session_state["authenticated"] = False
-                st.session_state["current_user"] = None
-                st.session_state["current_page"] = "Landing"
+                for key in st.session_state.keys():
+                    if key not in ["current_page"]:
+                        del st.session_state[key]
+                if "current_page" not in st.session_state:
+                    st.session_state["current_page"] = "Landing"
                 st.rerun()
 
         

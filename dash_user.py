@@ -104,7 +104,7 @@ def dash_user():
                 df_user[['Lieu', 'Catégorie', 'Visite', 'Note']],
                 column_config={
                     "command": "Streamlit Command",
-                    "note": st.column_config.NumberColumn(
+                    "Note": st.column_config.NumberColumn(
                         "Your rating",
                         help="How much do you like this command (1-5)?",
                         min_value=1,
@@ -118,7 +118,7 @@ def dash_user():
                 hide_index=True,
             )
 
-            favorite_restau = edited_df.loc[edited_df["note"].idxmax()]["Lieu"]
+            favorite_restau = edited_df.loc[edited_df["Note"].idxmax()]["Lieu"]
             st.markdown(f"Ton restaurant favoris est **{favorite_restau}** 🎈")
         else :
             df_user = df_liste
@@ -126,7 +126,7 @@ def dash_user():
                 df_user[['Lieu', 'Catégorie', 'Visite', 'Note']],
                 column_config={
                     "command": "Streamlit Command",
-                    "note": st.column_config.NumberColumn(
+                    "Note": st.column_config.NumberColumn(
                         "Your rating",
                         help="How much do you like this command (1-5)?",
                         min_value=1,
@@ -140,7 +140,7 @@ def dash_user():
                 hide_index=True,
             )
 
-            favorite_restau = edited_df.loc[edited_df["note"].idxmax()]["Lieu"]
+            favorite_restau = edited_df.loc[edited_df["Note"].idxmax()]["Lieu"]
             st.markdown(f"Ton restaurant favoris est **{favorite_restau}** 🎈")
 
         #st.dataframe(df_user[['Lieu','Catégorie','Visite']], hide_index=True)

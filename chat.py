@@ -31,28 +31,10 @@ def chatbot():
     API_KEY = os.getenv('api_google')
 
     if st.session_state.page == "chat":
-        # Liste des étapes
-        options_1 = ["🤖 Discute avec Robot bistro"]
-
 
         # Initialisation de l'étape courante dans session_state si elle n'existe pas
         if "current_step" not in st.session_state:
             st.session_state["current_step"] = "🤖 Discute avec Robot bistro"
-
-        # Affichage des étapes avec st.pills
-        selection_1 = st.pills("Les étapes :", options_1, selection_mode="single", default=st.session_state["current_step"])
-
-        st.divider()
-
-        # Si l'utilisateur a choisi une autre étape, on met à jour l'état
-        if selection_1 != st.session_state["current_step"]:
-            # Delete all the items in Session state
-            for key in st.session_state.keys():
-                if key not in ["user_id", "authenticated" ,"current_page"]:
-                    del st.session_state[key]
-                else:
-                    pass
-            st.session_state["current_step"] = selection_1
 
 
         if 'dico' not in st.session_state:
@@ -86,6 +68,24 @@ def chatbot():
 
 
         if st.session_state["current_step"] == "🤖 Discute avec Robot bistro":
+
+            # Liste des étapes
+            options_1 = ["🤖 Discute avec Robot bistro"]
+
+            # Affichage des étapes avec st.pills
+            selection_1 = st.pills("Les étapes :", options_1, selection_mode="single",default=st.session_state["current_step"])
+
+            st.divider()
+
+            # Si l'utilisateur a choisi une autre étape, on met à jour l'état
+            if selection_1 != st.session_state["current_step"]:
+                # Delete all the items in Session state
+                for key in st.session_state.keys():
+                    if key not in ["user_id", "authenticated", "current_page"]:
+                        del st.session_state[key]
+                    else:
+                        pass
+                st.session_state["current_step"] = selection_1
 
             # Disposition des colonnes pour l'affichage avec Streamlit
             chat_col, empty_col, img_col = st.columns([1.5, 0.1, 1])
@@ -225,6 +225,8 @@ def chatbot():
             if selection_2 != st.session_state["current_step"]:
                 st.session_state["current_step"] = selection_2
 
+            st.divider()
+
             # URL de l'API de l'image
             if "selected" not in st.session_state:
                 st.session_state["selected"] = ""
@@ -346,6 +348,8 @@ def chatbot():
 
             # Affichage des étapes avec st.pills
             selection_3 = st.pills("Les étapes :", options_3, selection_mode="single",default=st.session_state["current_step"])
+
+            st.divider()
 
             if selection_3 != st.session_state["current_step"]:
                 st.session_state["current_step"] = selection_3

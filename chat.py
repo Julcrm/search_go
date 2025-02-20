@@ -523,34 +523,22 @@ def chatbot():
                     # Afficher le carrousel dans l'app Streamlit
                     mage_local.show_carrousel(reviews)
 
-            # with cols[0]:  # Même colonne pour le toggle et le bouton
-            #     col_toggle, col_empty = st.columns([5, 0.5, 1])  # Deux sous-colonnes
+            with cols[0]: 
 
-            #     # with col_toggle:
-            #     #     walking = st.toggle("Y aller à pied", key="toggle")
+                st.markdown("""
+                        <style>
+                        @import url('https://fonts.bunny.net/css?family=bad-script:400');
 
-            #     if walking:
-            #         st.session_state["mode"] = "walking"
-            #         walking_duree = mage_local.afficher_duree(start_location, end_location, st.session_state["mode"])
-            #         st.markdown(f"""<div style="font-size: 1.25rem; font-weight: bold;">Temps de trajet : {walking_duree} &nbsp;&nbsp; <img src="https://i.ibb.co/LhJVnC1m/walking.png" width="40"></div>""", unsafe_allow_html=True)
+                        .handwritten {
+                            font-family: 'Bad Script', cursive;
+                            font-size: 24px;
+                        }
+                        </style>
+                        """,
+                        unsafe_allow_html=True)
 
-            #     else:
-            #         st.session_state["mode"] = "driving"
-            #         driving_duree = mage_local.afficher_duree(start_location, end_location, st.session_state["mode"])
-            #         st.markdown(f"""<div style="font-size: 1.25rem; font-weight: bold;">Temps de trajet : {driving_duree} &nbsp;&nbsp; <img src="https://i.ibb.co/qFFFybvZ/car-1.png" width="40"></div>""", unsafe_allow_html=True)
-
-            #     if st.session_state["mode"] == "driving":
-            #         st.components.v1.html(driving_map._repr_html_(), height=600, width=550)
-            #     else:
-            #         st.components.v1.html(walking_map._repr_html_(), height=600, width=550)
-
-                # with col_button:
-                #     if st.button("GO !!", key="go"):
-                #         if st.session_state["mode"] == "driving":
-                #             mage_local.api_mage_distance(st.session_state["mode"],driving_km)
-                #         else:
-                #             mage_local.api_mage_distance(st.session_state["mode"], walking_km)
-                #         st.toast("C'est parti ! Le trajet a été ajouté à votre tableau de bord 🎉")
+                st.markdown('<div class="handwritten">Merci d\'avoir choisi Bistro Robot</div>', unsafe_allow_html=True)
+                st.markdown('<div class="handwritten">Bon appétît</div>', unsafe_allow_html=True)
 
         
         with st.sidebar:

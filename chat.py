@@ -224,8 +224,16 @@ def chatbot():
             selection_2 = st.pills("Les étapes :", options_2, selection_mode="single",default=st.session_state["current_step"])
 
             if selection_2 != st.session_state["current_step"]:
-                st.session_state["current_step"] = selection_2
-                st.rerun()
+                if  selection_2 == "🤖 Discute avec Robot bistro":              # Delete all the items in Session state
+                    for key in st.session_state.keys():
+                        if key not in ["user_id", "authenticated", "current_page"]:
+                            del st.session_state[key]
+                    st.session_state["current_step"] = selection_2
+                    st.rerun()
+                else:
+                    st.session_state["current_step"] = selection_2
+                    st.rerun()
+
 
             st.divider()
 
@@ -354,8 +362,15 @@ def chatbot():
             st.divider()
 
             if selection_3 != st.session_state["current_step"]:
-                st.session_state["current_step"] = selection_3
-                st.rerun()
+                if selection_3 == "🤖 Discute avec Robot bistro":  # Delete all the items in Session state
+                    for key in st.session_state.keys():
+                        if key not in ["user_id", "authenticated", "current_page"]:
+                            del st.session_state[key]
+                    st.session_state["current_step"] = selection_3
+                    st.rerun()
+                else:
+                    st.session_state["current_step"] = selection_3
+                    st.rerun()
 
             if "mode" not in st.session_state:
                 st.session_state["mode"] = "driving"

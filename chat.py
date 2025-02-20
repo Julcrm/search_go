@@ -562,8 +562,8 @@ def chatbot():
                 st.write("")
                 # Ajouter un délai de quelques secondes
                 time.sleep(3)
-                #st.markdown('<div class="bottom-right">Merci Léo</div>', unsafe_allow_html=True)
-                #time.sleep(2)
+                st.markdown('<div class="bottom-right">Merci Léo</div>', unsafe_allow_html=True)
+                time.sleep(2)
                 st.balloons()
 
 

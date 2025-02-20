@@ -12,3 +12,4 @@ numpy
 plotly
 google-generativeai
 psycopg2
+streamlit_folium
